@@ -5,6 +5,7 @@ Tested with Travis CI
 [![Build Status](https://travis-ci.org/bodgit/puppet-rtadvd.svg?branch=master)](https://travis-ci.org/bodgit/puppet-rtadvd)
 [![Coverage Status](https://coveralls.io/repos/bodgit/puppet-rtadvd/badge.svg?branch=master&service=github)](https://coveralls.io/github/bodgit/puppet-rtadvd?branch=master)
 [![Puppet Forge](http://img.shields.io/puppetforge/v/bodgit/rtadvd.svg)](https://forge.puppetlabs.com/bodgit/rtadvd)
+[![Dependency Status](https://gemnasium.com/bodgit/puppet-rtadvd.svg)](https://gemnasium.com/bodgit/puppet-rtadvd)
 
 #### Table of Contents
 
