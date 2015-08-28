@@ -24,11 +24,12 @@ describe 'rtadvd::interface' do
         })
       end
 
+      it { should contain_concat__fragment('rtadvd interface em0') }
+      it { should contain_rtadvd__interface('em0') }
+
       case facts[:osfamily]
       when 'OpenBSD'
-        it { should contain_concat__fragment('rtadvd interface em0') }
         it { should contain_datacat_fragment('rtadvd interface em0') }
-        it { should contain_rtadvd__interface('em0') }
         #it { should contain_service('rtadvd').with_flags('em0') }
       else
       end
