@@ -1,0 +1,3 @@
+fixtures:
+  symlinks:
+    rtadvd: "#{source_dir}"

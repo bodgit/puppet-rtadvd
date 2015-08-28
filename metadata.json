@@ -1,0 +1,54 @@
+{
+  "name": "bodgit-rtadvd",
+  "version": "1.0.0",
+  "author": "bodgit",
+  "summary": "Puppet Module for managing the IPv6 route advertisement daemon",
+  "license": "Apache-2.0",
+  "source": "https://github.com/bodgit/puppet-rtadvd",
+  "project_page": "https://github.com/bodgit/puppet-rtadvd",
+  "issues_url": "https://github.com/bodgit/puppet-rtadvd/issues",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "OpenBSD",
+      "operatingsystemrelease": [
+        "5.7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ],
+  "tags": [
+    "rtadvd",
+    "radvd",
+    "ipv6"
+  ],
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">=4.6.0 <5.0.0"
+    },
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": ">=1.2.4 <2.0.0"
+    },
+    {
+      "name": "richardc/datacat",
+      "version_requirement": ">=0.6.1 <1.0.0"
+    },
+    {
+      "name": "herculesteam/augeasproviders_sysctl",
+      "version_requirement": ">=2.0.2 <3.0.0"
+    }
+  ]
+}

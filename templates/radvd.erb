@@ -1,0 +1,16 @@
+interface <%= @name %> {
+	AdvSendAdvert on;
+<% if @max_interval -%>
+	MaxRtrAdvInterval <%= @max_interval %>;
+<% end -%>
+<% if @min_interval -%>
+	MinRtrAdvInterval <%= @min_interval %>;
+<% end -%>
+	AdvManagedFlag <%= @managed_configuration ? 'on' : 'off' %>;
+	AdvOtherConfigFlag <%= @other_configuration ? 'on' : 'off' %>;
+	prefix ::/64 {
+		AdvOnLink on;
+		AdvAutonomous on;
+		AdvRouterAddr on;
+	};
+};
