@@ -7,6 +7,7 @@ class rtadvd::params {
     'OpenBSD': {
       $conf_file      = '/etc/rtadvd.conf'
       $manage_package = false
+      $package_name   = undef
       $service_name   = 'rtadvd'
       $sysctl_name    = 'net.inet6.ip6.forwarding'
     }
