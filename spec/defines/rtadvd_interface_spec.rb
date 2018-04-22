@@ -12,7 +12,14 @@ describe 'rtadvd::interface' do
 
   let(:params) do
     {
+      'dnssl'               => [
+        'example.com',
+      ],
       'other_configuration' => true,
+      'rdnss'               => [
+        '2001:db8::1',
+        '2001:db8::2',
+      ],
     }
   end
 
@@ -24,14 +31,38 @@ describe 'rtadvd::interface' do
         })
       end
 
-      it { should contain_concat__fragment('rtadvd interface em0') }
       it { should contain_rtadvd__interface('em0') }
 
       case facts[:osfamily]
       when 'OpenBSD'
+        it {
+          should contain_concat__fragment('rtadvd interface em0').with_content(<<~'EOS')
+            em0:\
+            	:raflags#64:\
+            	:rdnss="2001:db8::1,2001:db8::2":\
+            	:dnssl="example.com":
+          EOS
+        }
         it { should contain_datacat_fragment('rtadvd interface em0') }
-        #it { should contain_service('rtadvd').with_flags('em0') }
-      else
+      when 'RedHat'
+        it {
+          should contain_concat__fragment('rtadvd interface em0').with_content(<<~'EOS')
+            interface em0 {
+            	AdvSendAdvert on;
+            	AdvManagedFlag off;
+            	AdvOtherConfigFlag on;
+            	prefix ::/64 {
+            		AdvOnLink on;
+            		AdvAutonomous on;
+            		AdvRouterAddr on;
+            	};
+            	RDNSS 2001:db8::1 2001:db8::2 {
+            	};
+            	DNSSL example.com {
+            	};
+            };
+          EOS
+        }
       end
     end
   end

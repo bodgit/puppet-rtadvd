@@ -13,4 +13,18 @@ interface <%= @interface %> {
 		AdvAutonomous on;
 		AdvRouterAddr on;
 	};
+<% if @rdnss -%>
+	RDNSS <%= @rdnss.join(' ') %> {
+<%   if @rdnss_lifetime -%>
+		AdvRDNSSLifetime <%= @rdnss_lifetime %>;
+<%   end -%>
+	};
+<% end -%>
+<% if @dnssl -%>
+	DNSSL <%= @dnssl.join(' ') %> {
+<%   if @dnssl_lifetime -%>
+		AdvDNSSLLifetime <%= @dnssl_lifetime %>;
+<%   end -%>
+	};
+<% end -%>
 };

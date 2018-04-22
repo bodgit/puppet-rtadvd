@@ -6,6 +6,8 @@
 #     other_configuration => true,
 #   }
 #
+# @param dnssl An array of DNS search suffixes.
+# @param dnssl_lifetime Validity of the DNS search suffixes.
 # @param interface The interface name.
 # @param managed_configuration Whether to enable the managed configuration flag
 #   in advertisements, (i.e. use DHCPv6 exclusively).
@@ -16,14 +18,20 @@
 # @param other_configuration Whether to enable the other configuration flag in
 #   advertisements, (i.e. use SLAAC for address configuration and DHCPv6 for
 #   things like DNS servers, etc.).
+# @param rdnss An array of recursive DNS servers.
+# @param rdnss_lifetime Validity of the recursive DNS servers.
 #
 # @see puppet_classes::rtadvd ::rtadvd
 define rtadvd::interface (
-  String                     $interface             = $title,
-  Boolean                    $managed_configuration = false,
-  Optional[Integer[4, 1800]] $max_interval          = undef,
-  Optional[Integer[3, 1350]] $min_interval          = undef,
-  Boolean                    $other_configuration   = false,
+  String                                        $interface             = $title,
+  Boolean                                       $managed_configuration = false,
+  Boolean                                       $other_configuration   = false,
+  Optional[Array[Bodgitlib::Domain, 1]]         $dnssl                 = undef,
+  Optional[Integer[0]]                          $dnssl_lifetime        = undef,
+  Optional[Integer[4, 1800]]                    $max_interval          = undef,
+  Optional[Integer[3, 1350]]                    $min_interval          = undef,
+  Optional[Array[IP::Address::V6::NoSubnet, 1]] $rdnss                 = undef,
+  Optional[Integer[0]]                          $rdnss_lifetime        = undef,
 ) {
 
   case $::osfamily {
@@ -53,6 +61,22 @@ define rtadvd::interface (
         $min_interval ? {
           undef   => undef,
           default => "mininterval#${min_interval}",
+        },
+        $rdnss ? {
+          undef   => undef,
+          default => "rdnss=\"${join($rdnss, ',')}\"",
+        },
+        $rdnss_lifetime ? {
+          undef   => undef,
+          default => "rdnssltime#${rdnss_lifetime}",
+        },
+        $dnssl ? {
+          undef   => undef,
+          default => "dnssl=\"${join($dnssl, ',')}\"",
+        },
+        $dnssl_lifetime ? {
+          undef   => undef,
+          default => "dnsslltime#${dnssl_lifetime}",
         },
       ])
 
