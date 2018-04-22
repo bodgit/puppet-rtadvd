@@ -68,7 +68,7 @@ This module has been built on and tested against Puppet 4.6.0 and higher.
 
 The module has been tested on:
 
-* OpenBSD 5.7/5.8/5.9
+* OpenBSD 6.2/6.3
 * RedHat/CentOS Enterprise Linux 6/7
 
 ## Development
