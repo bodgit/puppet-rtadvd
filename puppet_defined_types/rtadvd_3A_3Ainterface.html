@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Defined Type: rtadvd::interface
+  
+    &mdash; Documentation by YARD 0.9.12
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "puppet_defined_types::rtadvd::interface";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../puppet_defined_type_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (r)</a> &raquo;
+    <span class='title'><span class='object_link'>Defined Types</span></span>
+     &raquo; 
+    <span class="title">rtadvd::interface</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="puppet_class_list_link"
+        href="../puppet_class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Defined Type: rtadvd::interface</h1>
+<div class="box_info">
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>
+      manifests/interface.pp
+    </dd>
+  </dl>
+</div>
+
+<h2>Overview</h2>
+<div class="docstring">
+  <div class="discussion">
+    
+<p>Configure advertisements on an interface.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Advertise on an interface with the <code>other</code> flag set</p>
+</div></p>
+      
+      <pre class="example code"><code>include ::rtadvd
+::rtadvd::interface { &#39;em0&#39;:
+  other_configuration =&gt; true,
+}</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dnssl</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Bodgitlib::Domain, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An array of DNS search suffixes.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dnssl_lifetime</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Validity of the DNS search suffixes.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interface</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$title</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The interface name.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>managed_configuration</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether to enable the managed configuration flag in advertisements, (i.e.
+use DHCPv6 exclusively).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_interval</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[4, 1800]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The maximum time allowed between sending unsolicited advertisements.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>min_interval</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[3, 1350]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The minimum time allowed between sending unsolicited advertisements.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>other_configuration</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether to enable the other configuration flag in advertisements, (i.e. use
+SLAAC for address configuration and DHCPv6 for things like DNS servers,
+etc.).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rdnss</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[IP::Address::V6::NoSubnet, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An array of recursive DNS servers.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rdnss_lifetime</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Validity of the recursive DNS servers.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="../puppet_classes/rtadvd.html" title="puppet_classes::rtadvd (puppet_class)">::rtadvd</a></span></li>
+    
+  </ul>
+
+</div><div class="method_details_list">
+  <table class="source_code">
+    <tr>
+      <td>
+        <pre class="lines">
+
+
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106</pre>
+      </td>
+      <td>
+        <pre class="code"><span class="info file"># File 'manifests/interface.pp', line 25</span>
+
+define rtadvd::interface (
+  String                                        $interface             = $title,
+  Boolean                                       $managed_configuration = false,
+  Boolean                                       $other_configuration   = false,
+  Optional[Array[Bodgitlib::Domain, 1]]         $dnssl                 = undef,
+  Optional[Integer[0]]                          $dnssl_lifetime        = undef,
+  Optional[Integer[4, 1800]]                    $max_interval          = undef,
+  Optional[Integer[3, 1350]]                    $min_interval          = undef,
+  Optional[Array[IP::Address::V6::NoSubnet, 1]] $rdnss                 = undef,
+  Optional[Integer[0]]                          $rdnss_lifetime        = undef,
+) {
+
+  case $::osfamily {
+    &#39;OpenBSD&#39;: {
+
+      $managed_raflag = $managed_configuration ? {
+        true    =&gt; 128,
+        default =&gt; 0,
+      }
+      $other_raflag = $other_configuration ? {
+        true    =&gt; 64,
+        default =&gt; 0,
+      }
+
+      $raflags = $managed_raflag + $other_raflag
+
+      # Turn parameters into an array of termcap-style capabilities
+      $capabilities = delete_undef_values([
+        $raflags ? {
+          0       =&gt; undef,
+          default =&gt; &quot;raflags#${raflags}&quot;,
+        },
+        $max_interval ? {
+          undef   =&gt; undef,
+          default =&gt; &quot;maxinterval#${max_interval}&quot;,
+        },
+        $min_interval ? {
+          undef   =&gt; undef,
+          default =&gt; &quot;mininterval#${min_interval}&quot;,
+        },
+        $rdnss ? {
+          undef   =&gt; undef,
+          default =&gt; &quot;rdnss=\&quot;${join($rdnss, &#39;,&#39;)}\&quot;&quot;,
+        },
+        $rdnss_lifetime ? {
+          undef   =&gt; undef,
+          default =&gt; &quot;rdnssltime#${rdnss_lifetime}&quot;,
+        },
+        $dnssl ? {
+          undef   =&gt; undef,
+          default =&gt; &quot;dnssl=\&quot;${join($dnssl, &#39;,&#39;)}\&quot;&quot;,
+        },
+        $dnssl_lifetime ? {
+          undef   =&gt; undef,
+          default =&gt; &quot;dnsslltime#${dnssl_lifetime}&quot;,
+        },
+      ])
+
+      ::concat::fragment { &quot;rtadvd interface ${interface}&quot;:
+        content =&gt; template(&#39;rtadvd/rtadvd.erb&#39;),
+        target  =&gt; $::rtadvd::conf_file,
+      }
+
+      datacat_fragment { &quot;rtadvd interface ${interface}&quot;:
+        target =&gt; &#39;rtadvd interfaces&#39;,
+        data   =&gt; {
+          &#39;interface&#39; =&gt; [$interface],
+        },
+      }
+    }
+    &#39;RedHat&#39;: {
+
+      ::concat::fragment { &quot;rtadvd interface ${interface}&quot;:
+        content =&gt; template(&#39;rtadvd/radvd.erb&#39;),
+        target  =&gt; $::rtadvd::conf_file,
+      }
+    }
+    default: {
+      # noop
+    }
+  }
+}</pre>
+      </td>
+    </tr>
+  </table>
+</div>
+</div>
+
+      <div id="footer">
+     Generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>.
+</div>
+
+    </div>
+  </body>
+</html>
