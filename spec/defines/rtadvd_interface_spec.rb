@@ -36,7 +36,7 @@ describe 'rtadvd::interface' do
       case facts[:osfamily]
       when 'OpenBSD'
         it {
-          should contain_concat__fragment('rtadvd interface em0').with_content(<<~'EOS')
+          should contain_concat__fragment('rtadvd interface em0').with_content(<<-'EOS'.gsub(/^ {12}/, ''))
             em0:\
             	:raflags#64:\
             	:rdnss="2001:db8::1,2001:db8::2":\
@@ -46,7 +46,7 @@ describe 'rtadvd::interface' do
         it { should contain_datacat_fragment('rtadvd interface em0') }
       when 'RedHat'
         it {
-          should contain_concat__fragment('rtadvd interface em0').with_content(<<~'EOS')
+          should contain_concat__fragment('rtadvd interface em0').with_content(<<-'EOS'.gsub(/^ {12}/, ''))
             interface em0 {
             	AdvSendAdvert on;
             	AdvManagedFlag off;
