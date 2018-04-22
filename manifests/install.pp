@@ -1,4 +1,4 @@
-#
+# @!visibility private
 class rtadvd::install {
 
   if $::rtadvd::manage_package {

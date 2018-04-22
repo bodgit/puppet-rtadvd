@@ -16,7 +16,12 @@ describe 'rtadvd' do
     sysctl    = 'net.inet6.ip6.forwarding'
   when 'RedHat'
     conf_file = '/etc/radvd.conf'
-    interface = 'ens33'
+    case fact(:operatingsystemmajrelease)
+    when '6'
+      interface = 'eth1'
+    when '7'
+      interface = 'ens33'
+    end
     content   = <<-EOS.gsub(/^ +/, '')
       # !!! Managed by Puppet !!!
       interface #{interface} {

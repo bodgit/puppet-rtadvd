@@ -1,4 +1,4 @@
-#
+# @!visibility private
 class rtadvd::service {
 
   service { $::rtadvd::service_name:

@@ -20,8 +20,6 @@ describe 'rtadvd' do
         })
       end
 
-      it { should contain_anchor('rtadvd::begin') }
-      it { should contain_anchor('rtadvd::end') }
       it { should contain_class('rtadvd') }
       it { should contain_class('rtadvd::config') }
       it { should contain_class('rtadvd::install') }

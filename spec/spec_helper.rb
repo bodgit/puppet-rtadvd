@@ -1,3 +1,7 @@
+RSpec.configure do |c|
+  c.mock_with :rspec
+end
+
 require 'puppetlabs_spec_helper/module_spec_helper'
 require 'rspec-puppet-facts'
 
@@ -7,14 +11,6 @@ unless RUBY_VERSION =~ /^1\.8/
 end
 
 include RspecPuppetFacts
-
-RSpec.configure do |c|
-  c.before(:each) do
-    #Puppet::Util::Log.level = :debug
-    #Puppet::Util::Log.newdestination(:console)
-    Puppet.features.stubs(:root? => true)
-  end
-end
 
 dir = Pathname.new(__FILE__).parent
 

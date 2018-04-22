@@ -1,19 +1,30 @@
+# Configure advertisements on an interface.
 #
+# @example Advertise on an interface with the `other` flag set
+#   include ::rtadvd
+#   ::rtadvd::interface { 'em0':
+#     other_configuration => true,
+#   }
+#
+# @param interface The interface name.
+# @param managed_configuration Whether to enable the managed configuration flag
+#   in advertisements, (i.e. use DHCPv6 exclusively).
+# @param max_interval The maximum time allowed between sending unsolicited
+#   advertisements.
+# @param min_interval The minimum time allowed between sending unsolicited
+#   advertisements.
+# @param other_configuration Whether to enable the other configuration flag in
+#   advertisements, (i.e. use SLAAC for address configuration and DHCPv6 for
+#   things like DNS servers, etc.).
+#
+# @see puppet_classes::rtadvd ::rtadvd
 define rtadvd::interface (
-  $managed_configuration = false,
-  $max_interval          = undef,
-  $min_interval          = undef,
-  $other_configuration   = false,
+  String                     $interface             = $title,
+  Boolean                    $managed_configuration = false,
+  Optional[Integer[4, 1800]] $max_interval          = undef,
+  Optional[Integer[3, 1350]] $min_interval          = undef,
+  Boolean                    $other_configuration   = false,
 ) {
-
-  validate_bool($managed_configuration)
-  if $max_interval {
-    validate_integer($max_interval)
-  }
-  if $min_interval {
-    validate_integer($min_interval)
-  }
-  validate_bool($other_configuration)
 
   case $::osfamily {
     'OpenBSD': {
@@ -45,24 +56,27 @@ define rtadvd::interface (
         },
       ])
 
-      ::concat::fragment { "rtadvd interface ${name}":
+      ::concat::fragment { "rtadvd interface ${interface}":
         content => template('rtadvd/rtadvd.erb'),
         target  => $::rtadvd::conf_file,
       }
 
-      datacat_fragment { "rtadvd interface ${name}":
+      datacat_fragment { "rtadvd interface ${interface}":
         target => 'rtadvd interfaces',
         data   => {
-          'interface' => [$name],
+          'interface' => [$interface],
         },
       }
     }
     'RedHat': {
 
-      ::concat::fragment { "rtadvd interface ${name}":
+      ::concat::fragment { "rtadvd interface ${interface}":
         content => template('rtadvd/radvd.erb'),
         target  => $::rtadvd::conf_file,
       }
+    }
+    default: {
+      # noop
     }
   }
 }

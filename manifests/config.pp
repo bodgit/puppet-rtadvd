@@ -1,4 +1,4 @@
-#
+# @!visibility private
 class rtadvd::config {
 
   if $::rtadvd::manage_sysctl {
@@ -17,7 +17,7 @@ class rtadvd::config {
 
   create_resources(rtadvd::interface, $::rtadvd::interfaces)
 
-  case $::osfamily { # lint:ignore:case_without_default
+  case $::osfamily {
     'OpenBSD': {
 
       # This bit is horrible, basically rtadvd(8) on OpenBSD will not start
@@ -56,11 +56,15 @@ class rtadvd::config {
         }
 
         datacat_collector { 'rtadvd interfaces':
-          template_body   => "set *[. =~ regexp('rtadvd_flags=.*')] 'rtadvd_flags=\"<%= @data['interface'].sort.join(' ') %>\"'", # lint:ignore:80chars
-          target_resource => Augeas['/etc/rc.conf.local/rtadvd_flags/interfaces'], # lint:ignore:80chars
+          template_body   => "set *[. =~ regexp('rtadvd_flags=.*')] 'rtadvd_flags=\"<%= @data['interface'].sort.join(' ') %>\"'",
+          target_resource => Augeas['/etc/rc.conf.local/rtadvd_flags/interfaces'],
           target_field    => 'changes',
+          before          => Augeas['/etc/rc.conf.local/rtadvd_flags/interfaces'],
         }
       }
+    }
+    default: {
+      # noop
     }
   }
 }

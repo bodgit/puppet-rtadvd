@@ -1,7 +1,7 @@
-#
+# @!visibility private
 class rtadvd::params {
 
-  $manage_sysctl  = true
+  $manage_sysctl = true
 
   case $::osfamily {
     'OpenBSD': {
@@ -19,7 +19,7 @@ class rtadvd::params {
       $sysctl_name    = 'net.ipv6.conf.all.forwarding'
     }
     default: {
-      fail("The ${module_name} module is not supported on ${::osfamily} based system.") # lint:ignore:80chars
+      fail("The ${module_name} module is not supported on ${::osfamily} based system.")
     }
   }
 }
