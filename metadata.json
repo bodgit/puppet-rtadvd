@@ -1,6 +1,6 @@
 {
   "name": "bodgit-rtadvd",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "author": "bodgit",
   "summary": "Puppet Module for managing the IPv6 route advertisement daemon",
   "license": "Apache-2.0",
