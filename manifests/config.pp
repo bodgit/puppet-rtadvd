@@ -15,9 +15,9 @@ class rtadvd::config {
     warn  => "# !!! Managed by Puppet !!!\n",
   }
 
-  $::rtadvd::interfaces.each |, | {
-    ::rtadvd::interface { :
-      * => ,
+  $::rtadvd::interfaces.each |$resource, $attributes| {
+    ::rtadvd::interface { $resource:
+      * => $attributes,
     }
   }
 
