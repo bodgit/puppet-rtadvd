@@ -2,6 +2,14 @@ require 'spec_helper'
 
 describe 'rtadvd' do
 
+  let(:params) do
+    {
+      :interfaces => {
+        'test' => {},
+      },
+    }
+  end
+
   context 'on unsupported distributions' do
     let(:facts) do
       {
@@ -25,6 +33,8 @@ describe 'rtadvd' do
       it { should contain_class('rtadvd::install') }
       it { should contain_class('rtadvd::params') }
       it { should contain_class('rtadvd::service') }
+      it { should contain_rtadvd__interface('test') }
+      it { should contain_concat__fragment('rtadvd interface test') }
 
       case facts[:osfamily]
       when 'OpenBSD'

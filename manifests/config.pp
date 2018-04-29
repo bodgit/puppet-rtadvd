@@ -15,7 +15,11 @@ class rtadvd::config {
     warn  => "# !!! Managed by Puppet !!!\n",
   }
 
-  create_resources(rtadvd::interface, $::rtadvd::interfaces)
+  $::rtadvd::interfaces.each |, | {
+    ::rtadvd::interface { :
+      * => ,
+    }
+  }
 
   case $::osfamily {
     'OpenBSD': {
